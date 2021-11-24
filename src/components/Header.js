@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { selectCars } from '../redux/car/carSlice';
+import { selectOtherProducts } from '../redux/otherProducts/otherProductsSlice';
 import { useSelector } from 'react-redux';
 
 export const Header = () => {
     const [burgerStatus, setBurgerStatus] = useState(false);
     const cars = useSelector(selectCars)
+    const other = useSelector(selectOtherProducts)
     return (
         <div>
             <Container>
@@ -32,12 +34,9 @@ export const Header = () => {
                     {cars && cars.map((car, index) => (
                         <li key={index}><a href="#" />{car}</li>
                     ))}
-                    <li><a href="#" />Existing inventory</li>
-                    <li><a href="#" />Used inventory</li>
-                    <li><a href="#" />Trade-in</li>
-                    <li><a href="#" />Cybertruck</li>
-                    <li><a href="#" />Roadster</li>
-                    <li><a href="#" />Existing inventory</li>
+                    {other && other.map((item, index) => (
+                        <li key={index}><a href="#" />{item}</li>
+                    ))}
                 </BurgerNav>
             </Container>
         </div>
